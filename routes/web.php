@@ -10,7 +10,11 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+use App\Submission;
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Api service reached';
 });
+
+
+$router->post('/submit', 'SubmissionController@submit');
+$router->get('/export', 'SubmissionController@export');
