@@ -15,8 +15,11 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $allowedOrigins = ['localhost:8000','voices4change.org'];
+        $origin = $request->header('host');
+
         // ALLOW OPTIONS METHOD
-        $headers = [
+        $headers = [ 
             'Access-Control-Allow-Origin'      => '*',
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE, PATCH',
             'Access-Control-Allow-Credentials' => 'true',
@@ -28,20 +31,26 @@ class CorsMiddleware
             return response()->json('OK', 200, $headers);
         }
         $response = $next($request);
-        if ($response instanceof \Illuminate\Http\Response) {
-            foreach ($headers as $key => $value) {
-                $response->header($key, $value);
+        
+        if(in_array($origin, $allowedOrigins)){
+            
+            if ($response instanceof \Illuminate\Http\Response) {
+                foreach ($headers as $key => $value) {
+                    $response->header($key, $value);
+                }
+                return $response;
             }
-            return $response;
+
+            if ($response instanceof \Symfony\Component\HttpFoundation\Response) {
+                foreach ($headers as $key => $value) {
+                    $response->headers->set($key, $value);
+                }
+                return $response;
+            }
         }
 
-        if ($response instanceof \Symfony\Component\HttpFoundation\Response) {
-            foreach ($headers as $key => $value) {
-                $response->headers->set($key, $value);
-            }
-            return $response;
-        }
-
-        return $response;
+       
+        return response()->json('Unauthorised', 400, $headers);
+        
     }
 }

@@ -17,4 +17,5 @@ $router->get('/', function () use ($router) {
 
 
 $router->post('/submit', 'SubmissionController@submit');
+$router->get('/submissions', 'SubmissionController@submissions');
 $router->get('/export', 'SubmissionController@export');

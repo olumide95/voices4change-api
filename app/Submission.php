@@ -13,7 +13,7 @@ class Submission extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'country','state','message','motivation',
+        'name', 'email','country','zip_code','attended_protest','message','motivation','comment'
     ];
 
     

@@ -16,10 +16,13 @@ class CreateSubmissionsTable extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->string('country');
-            $table->string('state')->nullable();
-            $table->string('motivation');
-            $table->string('message');
+            $table->string('attended_protest')->default('Yes');
+            $table->string('zip_code')->nullable();
+            $table->string('motivation')->nullable();
+            $table->string('message')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
