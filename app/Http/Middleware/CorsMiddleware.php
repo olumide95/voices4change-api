@@ -15,7 +15,7 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $allowedOrigins = ['localhost','voices4change.org','www.voices4change.org'];
+        $allowedOrigins = ['voices4change.org','www.voices4change.org'];
         $origin = parse_url($request->headers->get('origin'),  PHP_URL_HOST);
 
         // ALLOW OPTIONS METHOD
@@ -50,7 +50,7 @@ class CorsMiddleware
         }
 
        
-        return response()->json('Unauthorised '.$origin, 400, $headers);
+        return response()->json('Unauthorised!', 400, $headers);
         
     }
 }
