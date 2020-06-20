@@ -15,8 +15,9 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $allowedOrigins = ['voices4change.org','www.voices4change.org'];
-        $origin = parse_url($request->headers->get('origin'),  PHP_URL_HOST);
+        $allowedOrigins = explode(',', env('ALLOWED_DOMAINS'));;
+        
+        $origin = parse_url($request->headers->get('host'),  PHP_URL_HOST);
 
         // ALLOW OPTIONS METHOD
         $headers = [ 

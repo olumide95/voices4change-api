@@ -42,7 +42,7 @@ class SubmissionController extends Controller
 
     public function export(Request $request)
     {
-        return (new RequestExport())->download('invoices.xlsx');
+        return (new RequestExport())->download('report.xlsx');
         /*if($request->pass === env('REPORT_PASS')){
              return (new RequestExport())->download('invoices.xlsx');
         }*/
