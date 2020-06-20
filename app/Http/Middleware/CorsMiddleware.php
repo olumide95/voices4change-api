@@ -17,7 +17,7 @@ class CorsMiddleware
     {
         $allowedOrigins = explode(',', env('ALLOWED_DOMAINS'));;
         
-        $origin = parse_url($request->headers->get('host'),  PHP_URL_HOST);
+        $origin = parse_url($request->headers->get('origin'),  PHP_URL_HOST);
 
         // ALLOW OPTIONS METHOD
         $headers = [ 
